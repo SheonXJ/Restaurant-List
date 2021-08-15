@@ -70,6 +70,35 @@ return Restaurant.create({
   .then(() => res.redirect('/'))
   .catch(error => console.log(error))
 })
+//Routes setting:edit page
+app.get('/restaurants/:restaurantsId/edit', (req, res) => {
+  const id = req.params.restaurantsId
+  Restaurant.findById(id)
+    .lean()
+    .then(restaurant => res.render('edit', {restaurant}))
+    .catch(error => console.log(error))
+})
+//Route: save edit data
+app.post('/restaurants/:restaurantsId/edit', (req, res) => {
+  const id = req.params.restaurantsId
+  const restaurantEdit = req.body
+  console.log(restaurantEdit.description)
+  return Restaurant.findById(id)
+    .then(restaurant => {
+      restaurant.name = restaurantEdit.name
+      restaurant.name_en = restaurantEdit.name_en
+      restaurant.category = restaurantEdit.category
+      restaurant.image = restaurantEdit.image
+      restaurant.location = restaurantEdit.location
+      restaurant.phone = restaurantEdit.phone
+      restaurant.google_map = restaurantEdit.google_map
+      restaurant.rating = restaurantEdit.rating
+      restaurant.description = restaurantEdit.description
+      return restaurant.save()
+    })
+    .then(() => res.redirect(`/restaurants/${id}/detail`))
+    .catch(error => console.log(error))
+})
 
 //Activate and listen on the Express server
 app.listen(port, () => {
