@@ -78,7 +78,7 @@ app.get('/restaurants/:restaurantsId/edit', (req, res) => {
     .then(restaurant => res.render('edit', {restaurant}))
     .catch(error => console.log(error))
 })
-//Route: save edit data
+//Routes setting:save edit data
 app.post('/restaurants/:restaurantsId/edit', (req, res) => {
   const id = req.params.restaurantsId
   const restaurantEdit = req.body
@@ -97,6 +97,14 @@ app.post('/restaurants/:restaurantsId/edit', (req, res) => {
       return restaurant.save()
     })
     .then(() => res.redirect(`/restaurants/${id}/detail`))
+    .catch(error => console.log(error))
+})
+//Routes setting: delete restaurant data
+app.post('/restaurants/:restaurantsId/delete', (req, res) => {
+  const id = req.params.restaurantsId
+  return Restaurant.findById(id)
+    .then(restaurant => restaurant.remove())
+    .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
 

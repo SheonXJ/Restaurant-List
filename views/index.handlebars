@@ -49,9 +49,9 @@
                 <a href="./restaurants/{{this._id}}/edit">
                   <button class="btn btn-info mr-2">Edit</button>
                 </a>
-                <a href="./restaurants/{{this._id}}/delete">
-                  <button class="btn btn-danger mr-2" id="delete-btn">Delete</button>
-                </a>
+                <form action="./restaurants/{{this._id}}/delete" method="POST">
+                  <button type="submit" class="btn btn-danger mr-2" id="delete-btn">Delete</button>
+                </form>
               </div>
             </div>
           </a>
