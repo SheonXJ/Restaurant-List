@@ -32,12 +32,14 @@ app.get('/', (req, res) => {
     .then(restaurants => res.render('index', { restaurants }))
     .catch(error => console.log(error))
 })
-// //Routes setting:show list
-// app.get('/restaurants/:restaurants_id', (req, res) => {
-//   //如使用Number(),當 req.params.restaurants_id是空字串時,restaurants_id為 0 的餐廳會被錯誤取出來
-//   const restaurant = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurants_id)
-//   res.render('show', { restaurant: restaurant })
-// })
+//Routes setting:show restaurant detail page
+app.get('/restaurants/:restaurantsId/detail', (req, res) => {
+  const id = req.params.restaurantsId
+  Restaurant.findById(id)
+    .lean()
+    .then(restaurant => res.render('show', { restaurant }))
+    .catch(error => console.log(error))
+})
 // //Routes setting:search part
 // app.get('/search', (req, res) => {
 //   const keyword = req.query.keyword
