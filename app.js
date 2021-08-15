@@ -40,15 +40,19 @@ app.get('/restaurants/:restaurantsId/detail', (req, res) => {
     .then(restaurant => res.render('show', { restaurant }))
     .catch(error => console.log(error))
 })
-// //Routes setting:search part
-// app.get('/search', (req, res) => {
-//   const keyword = req.query.keyword
-//   const restaurants = restaurantList.results.filter(restaurant => {
-//     return restaurant.name.toLowerCase().includes(keyword.toLowerCase())
-//   })
-//   res.render('index', { restaurants: restaurants, keyword: keyword })
-// })
-
+//Routes setting:search part
+app.get('/search', (req, res) => {
+  const keyword = req.query.keyword.trim().toLowerCase()
+  const keywordRegex = new RegExp(keyword, 'i')
+  // const restaurants = restaurantList.results.filter(restaurant => {
+  //   return restaurant.name.toLowerCase().includes(keyword.toLowerCase())
+  // })
+  // res.render('index', { restaurants: restaurants, keyword: keyword })
+  return Restaurant.find({ name: { $regex: keywordRegex}})
+    .lean()
+    .then(restaurants => res.render('index', { restaurants }))
+    .catch(error => console.log(error))
+})
 //Routes setting:create page
 app.get('/restaurants/new', (req, res) => {
   res.render('new')
