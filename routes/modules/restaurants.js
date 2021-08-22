@@ -13,20 +13,6 @@ router.get('/:restaurantsId/detail', (req, res) => {
     .catch(error => console.log(error))
 })
 
-//Routes setting:search part
-router.get('/search', (req, res) => {
-  const keyword = req.query.keyword.trim().toLowerCase()
-  const keywordRegex = new RegExp(keyword, 'i')
-  // const restaurants = restaurantList.results.filter(restaurant => {
-  //   return restaurant.name.toLowerCase().includes(keyword.toLowerCase())
-  // })
-  // res.render('index', { restaurants: restaurants, keyword: keyword })
-  return Restaurant.find({ name: { $regex: keywordRegex } })
-    .lean()
-    .then(restaurants => res.render('index', { restaurants }))
-    .catch(error => console.log(error))
-})
-
 //Routes setting:create page
 router.get('/new', (req, res) => {
   res.render('new')
