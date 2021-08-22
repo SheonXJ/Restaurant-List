@@ -11,7 +11,10 @@ const restaurants = require('./modules/restaurants')
 router.use('/restaurants', restaurants)
 
 const search = require('./modules/search')
-router.use('/', search)
+router.use('/search', search)
+
+const sort = require('./modules/sort')
+router.use('/sort', sort)
 
 // 匯出路由器
 module.exports = router

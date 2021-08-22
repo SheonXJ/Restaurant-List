@@ -5,7 +5,7 @@ const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 
 //Routes setting:search part
-router.get('/search', (req, res) => {
+router.get('/', (req, res) => {
   const keyword = req.query.keyword.trim().toLowerCase()
   const keywordRegex = new RegExp(keyword, 'i')
   // const restaurants = restaurantList.results.filter(restaurant => {
