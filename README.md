@@ -1,11 +1,11 @@
-# Restaurant-List
+# Restaurant-List 1.0
 This website provides users with the information about the restaurants.
 
 ## How to Use
 * Git clone this project.(Use Terminal)
 
   ```
-  git clone https://github.com/TimZXJ/Restaurant-List
+  git clone https://github.com/TimZXJ/Restaurant-List-1.0.git
   ```
 * `cd` to restaurant list file.(Use Terminal)
 * Install npm packages.(Use Terminal)
@@ -28,4 +28,3 @@ This website provides users with the information about the restaurants.
 * jquery: 3.6.0
 * popper: 2.9.1
 * bootstrap: 4.6.0
-* mongoose: 5.13.7

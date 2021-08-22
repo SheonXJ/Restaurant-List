@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const port = 3000
 const exphbs = require('express-handlebars')//Require express-handlebars
+const methodOverride = require('method-override')
 const mongoose = require('mongoose')//Require mongoose
 const Restaurant = require('./models/restaurant.js')
 
@@ -24,6 +25,9 @@ app.set('view engine', 'handlebars')
 app.use(express.static('public'))
 //Setting body-parser 進行前置處理
 app.use(express.urlencoded({ extended: true}))
+//Setting method-override 路由覆蓋機制
+app.use(methodOverride('_method'))
+
 
 //Routes setting:index
 app.get('/', (req, res) => {
@@ -83,10 +87,9 @@ app.get('/restaurants/:restaurantsId/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 //Routes setting:save edit data
-app.post('/restaurants/:restaurantsId/edit', (req, res) => {
+app.put('/restaurants/:restaurantsId', (req, res) => {
   const id = req.params.restaurantsId
   const restaurantEdit = req.body
-  console.log(restaurantEdit.description)
   return Restaurant.findById(id)
     .then(restaurant => {
       restaurant.name = restaurantEdit.name
@@ -104,7 +107,7 @@ app.post('/restaurants/:restaurantsId/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 //Routes setting: delete restaurant data
-app.post('/restaurants/:restaurantsId/delete', (req, res) => {
+app.delete('/restaurants/:restaurantsId', (req, res) => {
   const id = req.params.restaurantsId
   return Restaurant.findById(id)
     .then(restaurant => restaurant.remove())
