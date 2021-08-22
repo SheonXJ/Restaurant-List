@@ -14,9 +14,18 @@
       </form>
     </div>
   </div>
-    <a href="/restaurants/new" class="ml-2" style="display: inline;">
-      <button type="submit" class="btn btn-primary">新增餐廳</button>
-    </a>
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">
+      SORT
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="/sort/asc">A to Z</a>
+      <a class="dropdown-item" href="/sort/desc">Z to A</a>
+      <a class="dropdown-item" href="/sort/category">種類</a>
+      <a class="dropdown-item" href="/sort/location">地區</a>
+    </div>
+  </div>
 </div>
 
 <!-- restaurant list -->
