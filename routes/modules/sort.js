@@ -4,21 +4,19 @@ const router = express.Router()
 //引用model
 const Restaurant = require('../../models/restaurant')
 
-router.get('/:sortType', (req, res) => {
+router.get('/:sortType/:display', (req, res) => {
   const sortType = req.params.sortType
+  const display = req.params.display
   const sort = {}
   switch (sortType) {
-    case 'asc':
-      sort.name = 'asc'
+    case 'name':
+      sort.name = display
       break
-    case 'desc':
-      sort.name = 'desc'
+    case 'category':
+      sort.category = display
       break
-    case 'asc':
-      sort.category = 'asc'
-      break
-    case 'asc':
-      sort.location = 'asc'
+    case 'location':
+      sort.location = display
       break
   }
   Restaurant.find()
