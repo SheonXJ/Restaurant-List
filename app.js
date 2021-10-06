@@ -4,6 +4,8 @@ const exphbs = require('express-handlebars')//Require express-handlebars
 const methodOverride = require('method-override')
 const session = require('express-session')
 const routes = require('./routes')
+
+const usePassport = require('./config/passport')
 require('./config/mongoose')
 
 const app = express()
@@ -24,6 +26,8 @@ app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true}))
 //Setting method-override 路由覆蓋機制
 app.use(methodOverride('_method'))
+//Setting passport
+usePassport(app)
 // 將 request 導入路由器
 app.use(routes)
 
