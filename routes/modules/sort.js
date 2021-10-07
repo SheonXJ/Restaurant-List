@@ -5,6 +5,7 @@ const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 
 router.get('/:sortType/:display', (req, res) => {
+  const userId = req.user._id
   const sortType = req.params.sortType
   const display = req.params.display
   const sort = {}
@@ -19,7 +20,7 @@ router.get('/:sortType/:display', (req, res) => {
       sort.location = display
       break
   }
-  Restaurant.find()
+  Restaurant.find({ userId })
     .sort(sort)
     .lean()
     .then(restaurants => res.render('index', {restaurants}))
