@@ -6,13 +6,16 @@ const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-ac
 const methodOverride = require('method-override')
 const flash = require('connect-flash')
 const session = require('express-session')
-const routes = require('./routes')
+if (process.env.NODE_ENV !== 'production') { //判別開發環境
+  require('dotenv').config()
+}
 
+const routes = require('./routes')
 const usePassport = require('./config/passport')
 require('./config/mongoose')
 
 const app = express()
-const port = 3000
+const port = process.env.PORT
 
 //Setting template engine
 app.engine('handlebars', exphbs({ 
@@ -22,7 +25,7 @@ app.engine('handlebars', exphbs({
 app.set('view engine', 'handlebars')
 //Setting express-session init
 app.use(session({
-  secret: "ThisIsMySecret",
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))
